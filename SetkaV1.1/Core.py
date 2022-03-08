@@ -35,21 +35,14 @@ class OneArr(CommonArr):
         for i in range (len(self.players)):
             pl_=self.players[i]
             if pl_.IsActive==True:
-                actPlayer= pl_                
-        self.SetNextPlayer() 
-        return actPlayer
-
-    def SetNextPlayer(self):       
-
-        for i in range (len(self.players)):
-            pl_=self.players[i]
-            if pl_.IsActive==True:
                 pl_.IsActive=False
                 if i==len(self.players)-1 :             
                   self.players[0].IsActive=True
                 else:
                   self.players[i+1].IsActive=True
-                return    
+                return pl_
+        
+  
 
     def Step(self,n):
         ActivePlayer=self.GetActivePlayer()
