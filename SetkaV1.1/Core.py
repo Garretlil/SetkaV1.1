@@ -33,14 +33,13 @@ class OneArr(CommonArr):
     def GetActivePlayer(self):
         actPlayer=self.players[0]
         for i in range (len(self.players)):
-            pl_=self.players[i]
-            if pl_.IsActive==True:
-                pl_.IsActive=False
+            if self.players[i].IsActive:
+                self.players[i].IsActive=False
                 if i==len(self.players)-1 :             
                   self.players[0].IsActive=True
                 else:
                   self.players[i+1].IsActive=True
-                return pl_
+                return self.players[i]
         
   
 
