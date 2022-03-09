@@ -1,14 +1,14 @@
 
 class Player:   
-   def __init__(self, name_,active_,symbol_,func_,setka):
+   def __init__(self, name_,active_,symbol_,func_):
         self.Name = name_
         self.IsActive=active_
         self.Symbol=symbol_
         self.fun = func_
-        self.setka=setka
+    
 
    def StepPlayer(self):
-        self.fun(self.setka,self)
+        self.fun(self)
 
 class CommonArr:
     arraysetka=[]
@@ -49,7 +49,7 @@ class OneArr(CommonArr):
     def AddPlayer(self,Pl):
         self.players.append(Pl)
 
-    def Step(self,setka,activeplayer_):
+    def Step(self,activeplayer_):
         #ActivePlayer=self.GetActivePlayer()
         
         x=input('следующий ход игрока '+activeplayer_.Name + ' ['+ activeplayer_.Symbol +'], выберите номер: ')
@@ -62,7 +62,7 @@ class OneArr(CommonArr):
         if self.is_integer(x) :
             x=int(x)
             try:
-                if not(x<=setka**2 and x>0 ):
+                if not(x<=self.setka**2 and x>0 ):
                     raise BaseException("введи допустимое значение")
                 if not(x in self.arraysetka):
                     raise BaseException("поле занято")
@@ -70,7 +70,7 @@ class OneArr(CommonArr):
                 self.arraysteps.append(x)
             except BaseException as ve:
               print(ve)
-              self.Step(setka,activeplayer_)    
+              self.Step(activeplayer_)    
         
 
     def ResearchOfSize(self,current_element,maxlensymbol_):    
@@ -78,51 +78,53 @@ class OneArr(CommonArr):
         return maxlensymbol_-dlina
 
 
-    def vuvod_stroka(self,setka_,k): 
+    def vuvod_stroka(self,k): 
         stroka='|'
-        maxlensymbol=len(str(setka_**2))
-        for i in range(k,k+setka_):
+        maxlensymbol=len(str(self.setka**2))
+        for i in range(k,k+self.setka):
             stroka+=str(self.arraysetka[i])
             stroka+=' '*self.ResearchOfSize(self.arraysetka[i],maxlensymbol)
             stroka+='|'
         return stroka
 
-    def ToConsoleArray(self,setka_):    
+    def ToConsoleArray(self):    
         t=0
-        for i in range(setka_):
-            stroka=self.vuvod_stroka(setka_,t)
+        for i in range(self.setka):
+            stroka=self.vuvod_stroka(t)
             print(stroka)
-            t+=setka_
-    def win(self,n):
+            t+=self.setka
+
+    def win(self):
         k=0
         mass=[]
+
         # проверка по строкам
-        for i in range(n):
-            for s in range(k,k+n):
+        for i in range(self.setka):
+            for s in range(k,k+self.setka):
                 mass.append(self.arraysetka[s])
             if self.askwin(mass):
                 return True
             else:
-                k+=n
+                k+=self.setka
 
         mass.clear()
             # проверка по столбцам
-        for i in range(n):  
+        for i in range(self.setka):  
             mass.clear()
-            for s in range(i,i+n*(n-1)+1,n):
+            for s in range(i,i+self.setka*(self.setka-1)+1,self.setka):
                 mass.append(self.arraysetka[s])
             if self.askwin(mass):
                 return True
 
         mass.clear()
          # проверка по диагоналям
-        for i in range(0,n**2,n+1):
+        for i in range(0,self.setka**2,self.setka+1):
             mass.append(self.arraysetka[i])
         if self.askwin(mass):
                 return True
 
         mass.clear()
-        for i in range(n-1,n**2-n+1,n-1):
+        for i in range(self.setka-1,self.setka**2-self.setka+1,self.setka-1):
             mass.append(self.arraysetka[i])
         if self.askwin(mass):
                 return True
@@ -132,6 +134,6 @@ class OneArr(CommonArr):
  
     
 
-    def initArr(self,setka):
-       for i in range(1,setka**2+1):
+    def initArr(self):
+       for i in range(1,self.setka**2+1):
         self.arraysetka.append(i)
