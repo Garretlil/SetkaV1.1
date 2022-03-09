@@ -1,19 +1,20 @@
 import Core
-plaeyr1=Core.Player("Tom",True,"X")
-plaeyr2=Core.Player("Jane",False,"Y")
-plaeyr3=Core.Player("Kate",False,"Z")
 
 setka=4
 
- 
+MainSetka=Core.OneArr(setka)
 
-MainSetka=Core.OneArr([plaeyr1,plaeyr2,plaeyr3])
+plaeyr1=Core.Player("Tom",True,"X",MainSetka.Step,MainSetka.setka)
+plaeyr2=Core.Player("Jane",False,"Y",MainSetka.Step,MainSetka.setka)
+
+MainSetka.AddPlayer(plaeyr1)
+MainSetka.AddPlayer(plaeyr2)
 
 MainSetka.initArr(setka)
 MainSetka.ToConsoleArray(setka)
 
 while True:
-     MainSetka.Step(setka)
+     MainSetka.GetActivePlayer().StepPlayer()
      MainSetka.ToConsoleArray(setka)    
      if MainSetka.win(setka):
         print('Win!')

@@ -1,10 +1,14 @@
 
-class Player:
-   def __init__(self, name_,active_,symbol_):
+class Player:   
+   def __init__(self, name_,active_,symbol_,func_,setka):
         self.Name = name_
         self.IsActive=active_
         self.Symbol=symbol_
+        self.fun = func_
+        self.setka=setka
 
+   def StepPlayer(self):
+        self.fun(self.setka,self)
 
 class CommonArr:
     arraysetka=[]
@@ -20,8 +24,8 @@ class CommonArr:
 
 class OneArr(CommonArr):
 
-    def __init__(self,players_): 
-           self.players=players_
+    def __init__(self,setka_): 
+        self.setka=setka_
 
     def is_integer(self,s):
         try:
@@ -42,11 +46,13 @@ class OneArr(CommonArr):
                 return self.players[i]
         
   
+    def AddPlayer(self,Pl):
+        self.players.append(Pl)
 
-    def Step(self,n):
-        ActivePlayer=self.GetActivePlayer()
+    def Step(self,setka,activeplayer_):
+        #ActivePlayer=self.GetActivePlayer()
         
-        x=input('следующий ход игрока '+ActivePlayer.Name + ' ['+ ActivePlayer.Symbol +'], выберите номер: ')
+        x=input('следующий ход игрока '+activeplayer_.Name + ' ['+ activeplayer_.Symbol +'], выберите номер: ')
 
         if x.upper()=='R' :
             if  len(self.arraysteps)!=0:
@@ -56,15 +62,15 @@ class OneArr(CommonArr):
         if self.is_integer(x) :
             x=int(x)
             try:
-                if not(x<=n**2 and x>0 ):
+                if not(x<=setka**2 and x>0 ):
                     raise BaseException("введи допустимое значение")
                 if not(x in self.arraysetka):
                     raise BaseException("поле занято")
-                self.arraysetka[x-1]=ActivePlayer.Symbol
+                self.arraysetka[x-1]=activeplayer_.Symbol
                 self.arraysteps.append(x)
             except BaseException as ve:
               print(ve)
-              self.Step(n)    
+              self.Step(setka,activeplayer_)    
         
 
     def ResearchOfSize(self,current_element,maxlensymbol_):    
