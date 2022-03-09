@@ -4,6 +4,7 @@ plaeyr2=Core.Player("Jane",False,"Y")
 plaeyr3=Core.Player("Kate",False,"Z")
 
 setka=4
+
  
 
 MainSetka=Core.OneArr([plaeyr1,plaeyr2,plaeyr3])
