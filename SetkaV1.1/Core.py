@@ -10,7 +10,7 @@ class Player:
    def StepPlayer(self):
         self.fun(self)
 
-class CommonArr:
+class CommonCore:
     arraysetka=[]
     arraysteps=[]
     players=[]
@@ -44,7 +44,7 @@ class CommonArr:
     def AddPlayer(self,Pl):
         self.players=Pl
 
-class OneArr(CommonArr):
+class OneCore(CommonCore):
 
 
     def Step(self,activeplayer_):

@@ -1,6 +1,6 @@
 import Core
 
-MainSetka=Core.OneArr(4)
+MainSetka=Core.OneCore(4)
 
 MainSetka.AddPlayer([Core.Player("Tom",True,"X",MainSetka.Step),Core.Player("Jane",False,"Y",MainSetka.Step)])
 
