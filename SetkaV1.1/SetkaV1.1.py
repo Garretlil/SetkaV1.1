@@ -1,14 +1,8 @@
 import Core
 
-setka=4
+MainSetka=Core.OneArr()
 
-MainSetka=Core.OneArr(setka)
-
-plaeyr1=Core.Player("Tom",True,"X",MainSetka.Step)
-plaeyr2=Core.Player("Jane",False,"Y",MainSetka.Step)
-
-MainSetka.AddPlayer(plaeyr1)
-MainSetka.AddPlayer(plaeyr2)
+MainSetka.AddPlayer([Core.Player("Tom",True,"X",MainSetka.Step),Core.Player("Jane",False,"Y",MainSetka.Step)])
 
 MainSetka.initArr()
 MainSetka.ToConsoleArray()

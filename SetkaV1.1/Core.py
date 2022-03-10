@@ -15,18 +15,15 @@ class CommonArr:
     arraysteps=[]
     players=[]
 
+    def __init__(self,setka_=3): 
+        self.setka=setka_   
+
     def askwin(self,win_combinations):   
         for i in range(len(win_combinations)-1):
             if win_combinations[i]!=win_combinations[i+1]:
                 return False
         return True
  
-
-class OneArr(CommonArr):
-
-    def __init__(self,setka_): 
-        self.setka=setka_
-
     def is_integer(self,s):
         try:
             int(s)
@@ -35,7 +32,6 @@ class OneArr(CommonArr):
             return False 
     
     def GetActivePlayer(self):
-        actPlayer=self.players[0]
         for i in range (len(self.players)):
             if self.players[i].IsActive:
                 self.players[i].IsActive=False
@@ -44,10 +40,12 @@ class OneArr(CommonArr):
                 else:
                   self.players[i+1].IsActive=True
                 return self.players[i]
-        
-  
+
     def AddPlayer(self,Pl):
-        self.players.append(Pl)
+        self.players=Pl
+
+class OneArr(CommonArr):
+
 
     def Step(self,activeplayer_):
         #ActivePlayer=self.GetActivePlayer()
